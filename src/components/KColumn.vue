@@ -3,7 +3,7 @@ import { ref, toRef } from 'vue'
 import { useRouter } from 'vue-router'
 import { TaskStatus } from '../types'
 import { dragAndDrop } from "@formkit/drag-and-drop/vue"
-import { animations } from "@formkit/drag-and-drop"
+import { animations, handleEnd } from "@formkit/drag-and-drop"
 import { usePersistance } from '../persistance'
 import KTask from '../components/KTask.vue'
 import KBtn from '../components/KBtn.vue'
@@ -26,6 +26,10 @@ dragAndDrop({
     group: 'tasks',
     dropZoneClass: "dragging",
     plugins: [animations()],
+    handleEnd(e) {
+        persistance.update()
+        handleEnd(e)
+    },
 })
 </script>
 
