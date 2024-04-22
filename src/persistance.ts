@@ -1,9 +1,10 @@
 import { ref } from 'vue'
 import { type ITask, TaskStatus } from '@/types'
+import { useLocalStorage } from '@vueuse/core'
 
-const done = ref<ITask[]>([])
-const inProgress = ref<ITask[]>([])
-const todo = ref<ITask[]>([])
+const done = useLocalStorage<ITask[]>('done-key', [])
+const inProgress = useLocalStorage<ITask[]>('in-progress-key', [])
+const todo = useLocalStorage<ITask[]>('todo-key', [])
 
 function uuid() {
   return Math.random().toString(36).substring(2) + Date.now().toString(36)
